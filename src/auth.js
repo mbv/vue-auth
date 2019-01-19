@@ -128,7 +128,7 @@ module.exports = function () {
         if (req.impersonating === false && this.impersonating()) {
             tokenName = this.options.tokenDefaultName;
         }
-        
+
         token = __token.get.call(this, tokenName);
 
         if (token) {
@@ -273,7 +273,7 @@ module.exports = function () {
     function _fetchProcess(res, data) {
         this.watch.authenticated = true;
         this.watch.data = this.options.parseUserData.call(this, this.options.http._httpData.call(this, res));
-        
+
         this.watch.loaded = true;
 
         if (this.options.fetchData.success) { this.options.fetchData.success.call(this, res); }
@@ -676,6 +676,10 @@ module.exports = function () {
         return __bindContext.call(this, 'login', data);
     };
 
+    Auth.prototype.remember = function (data) {
+        return __cookie.remember.call(this, data);
+    };
+
     Auth.prototype.logout = function (data) {
         return __bindContext.call(this, 'logout', data);
     };
@@ -702,7 +706,7 @@ module.exports = function () {
         if (this.impersonating()) {
             this.currentToken = this.options.tokenDefaultName;
         }
-    }; 
+    };
 
     return Auth;
 };

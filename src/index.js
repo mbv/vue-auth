@@ -3,11 +3,12 @@ var Auth = require('./auth.js')();
 module.exports = (function () {
 
     return function install(Vue, options) {
-        
+
         var auth = new Auth(Vue, options);
 
         var ready = auth.ready;
         var login = auth.login;
+        var remember = auth.remember;
         var fetch = auth.fetch;
         var logout = auth.logout;
         var oauth2 = auth.oauth2;
@@ -23,6 +24,7 @@ module.exports = (function () {
                 get: function () {
                     auth.ready = ready.bind(this);
                     auth.login = login.bind(this);
+                    auth.remember = remember.bind(this);
                     auth.fetch = fetch.bind(this);
                     auth.logout = logout.bind(this);
                     auth.oauth2 = oauth2.bind(this);
